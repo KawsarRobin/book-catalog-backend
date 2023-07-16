@@ -20,6 +20,7 @@ const createUser = async (user: IUser): Promise<IUser | null> => {
 
 //Login user
 const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
+  console.log(payload);
   const { email, password } = payload;
 
   if (!email) {

@@ -10,9 +10,9 @@ import { IBook, IBookFilters } from './book.interface';
 import { Book } from './book.model';
 
 //Add book
-const addBook = async (cow: IBook): Promise<IBook | null> => {
-  const newCow = (await Book.create(cow)).populate('user');
-  return newCow;
+const addBook = async (book: IBook): Promise<IBook | null> => {
+  const newBook = (await Book.create(book)).populate('user');
+  return newBook;
 };
 
 //get all cows
@@ -104,7 +104,10 @@ const deleteBook = async (
     isExist = await Book.findOne({ _id: id, user: userData.id });
   }
   if (!isExist) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Book not found !');
+    throw new ApiError(
+      httpStatus.NOT_FOUND,
+      'You May Not able to delete this book !'
+    );
   }
   const result = await Book.findByIdAndDelete(id);
   return result;
